@@ -1,0 +1,23 @@
+---
+- name: ensure denyhosts is at the latest version
+  apt: pkg=denyhosts state=latest update_cache=yes
+  notify:
+  - restart denyhosts
+  tags:
+    - denyhosts
+    - packages
+
+- name: ensuring deny hosts configuration is in correct state.
+  copy:
+    dest=/etc/denyhosts.conf
+    src=denyhosts.conf
+    owner=root
+    mode=0644
+  notify:
+  - restart denyhosts
+  tags:
+    - denyhosts
+    - files
+
+# REFERENCES:
+# Ubuntu step 12 hardening from http://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics

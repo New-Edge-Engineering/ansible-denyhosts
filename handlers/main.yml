@@ -1,0 +1,6 @@
+---
+- name: restart denyhosts
+  service: >
+    name=denyhosts
+    state=restarted
+    enabled=true
